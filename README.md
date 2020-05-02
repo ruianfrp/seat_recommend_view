@@ -1,0 +1,1 @@
+https://github.com/ruianfrp/seat_recommend_view.git
