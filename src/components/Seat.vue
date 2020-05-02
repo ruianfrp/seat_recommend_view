@@ -1,4 +1,5 @@
-<template><div class="content">
+<template>
+<div class="content">
 	<h1>座位详情</h1>
 	<div class="main">
 		<h2>教学楼1-101</h2>
@@ -17,12 +18,99 @@
 				<div id="1_8" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
 				<div id="1_9" class="seatCharts-seat seatCharts-cell available" aria-checked="false"></div>
 				<div id="1_10" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-				<div id="1_11" class="seatCharts-seat seatCharts-cell available" tabindex="-1" role="checkbox" focusable="true" aria-checked="false"></div>
-				<div id="1_12" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
 			</div>
 			<div class="seatCharts-row">
 				<div class="seatCharts-cell seatCharts-space">2</div>
-				<div id="2_1" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="2_2" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="2_3" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="2_4" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="2_5" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="2_6" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="2_7" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="2_8" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="2_9" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="2_10" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div></div><div class="seatCharts-row"><div class="seatCharts-cell seatCharts-space">3</div><div class="seatCharts-cell seatCharts-space"></div><div class="seatCharts-cell seatCharts-space"></div><div class="seatCharts-cell seatCharts-space"></div><div class="seatCharts-cell seatCharts-space"></div><div class="seatCharts-cell seatCharts-space"></div><div class="seatCharts-cell seatCharts-space"></div><div class="seatCharts-cell seatCharts-space"></div><div class="seatCharts-cell seatCharts-space"></div><div class="seatCharts-cell seatCharts-space"></div><div class="seatCharts-cell seatCharts-space"></div></div><div class="seatCharts-row"><div class="seatCharts-cell seatCharts-space">4</div><div id="4_1" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="4_2" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="4_3" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable available"></div><div id="4_4" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable"></div><div id="4_5" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable"></div><div id="4_6" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="4_7" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="4_8" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div class="seatCharts-cell seatCharts-space"></div><div class="seatCharts-cell seatCharts-space"></div><div id="4_11" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="4_12" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable"></div></div><div class="seatCharts-row"><div class="seatCharts-cell seatCharts-space">5</div><div id="5_1" class="seatCharts-seat seatCharts-cell"></div><div id="5_2" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="5_3" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="5_4" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="5_5" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="5_6" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable available"></div><div id="5_7" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable available"></div><div id="5_8" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="5_9" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="5_10" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div></div><div class="seatCharts-row"><div class="seatCharts-cell seatCharts-space">6</div><div id="6_1" class="seatCharts-seat seatCharts-cell available" aria-checked="false"></div><div id="6_2" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="6_3" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="6_4" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="6_5" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="6_6" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable"></div><div id="6_7" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable"></div><div id="6_8" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="6_9" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="6_10" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="6_11" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable"></div></div><div class="seatCharts-row"><div class="seatCharts-cell seatCharts-space">7</div><div id="7_1" class="seatCharts-seat seatCharts-cell"></div><div id="7_2" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="7_3" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="7_4" class="seatCharts-seat seatCharts-cell available" aria-checked="false"></div><div id="7_5" class="seatCharts-seat seatCharts-cell"></div><div id="7_6" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="7_7" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="7_8" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="7_9" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable"></div><div id="7_10" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable"></div><div id="7_11" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable"></div><div id="7_12" class="seatCharts-seat seatCharts-cell"></div></div><div class="seatCharts-row"><div class="seatCharts-cell seatCharts-space">8</div><div id="8_1" class="seatCharts-seat seatCharts-cell"></div><div id="8_2" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="8_3" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="8_4" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="8_5" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable"></div><div id="8_6" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable"></div><div id="8_7" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable"></div><div id="8_8" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable"></div><div id="8_9" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="8_10" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="8_11" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div><div id="8_12" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div></div></div>
+				<div id="2_1" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
+				<div id="2_2" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
+				<div id="2_3" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
+				<div id="2_4" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
+				<div id="2_5" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
+				<div id="2_6" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
+				<div id="2_7" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
+				<div id="2_8" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
+				<div id="2_9" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
+				<div id="2_10" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
+			</div>
+			<div class="seatCharts-row">
+				<div class="seatCharts-cell seatCharts-space">3</div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+			</div>
+			<div class="seatCharts-row">
+				<div class="seatCharts-cell seatCharts-space">4</div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+			</div>
+			<div class="seatCharts-row">
+				<div class="seatCharts-cell seatCharts-space">5</div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+			</div>
+			<div class="seatCharts-row">
+				<div class="seatCharts-cell seatCharts-space">6</div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+			</div>
+			<div class="seatCharts-row">
+				<div class="seatCharts-cell seatCharts-space">7</div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+			</div>
+			<div class="seatCharts-row">
+				<div class="seatCharts-cell seatCharts-space">8</div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+				<div class="seatCharts-cell seatCharts-space"></div>
+			</div>
+			</div>
 			<div class="booking-details">
 				<ul class="book-left">	
 					<li>总座位数</li>
@@ -33,48 +121,19 @@
 					<li>42</li>
 					<li>35</li>
 				</ul>
-				<div class="clear">此教室位于南校区南部，地点位置比较优异，且靠窗位置比较多，广受师生好评。</div>
-				
-			
-						
-					
+				<div class="clear">此教室位于南校区南部，地点位置比较优异，且靠窗位置比较多，广受师生好评。</div>	
 				<div id="legend" class="seatCharts-legend"><ul class="seatCharts-legendList"><li class="seatCharts-legendItem"><div class="seatCharts-seat seatCharts-cell available"></div><span class="seatCharts-legendDescription">无人</span></li><li class="seatCharts-legendItem"><div class="seatCharts-seat seatCharts-cell unavailable"></div><span class="seatCharts-legendDescription">有人</span></li></ul></div>
 			</div>
 			<div style="clear:both"></div>
-	    </div>
-
-			
+	    </div>	
 	</div>
 	<p class="copy_rights">© 2020 Self-study seat search and seat recommendation system. </p>
 </div>
-
 </template>
 
 <style>
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,dl,dt,dd,ol,nav ul,nav li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
-article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display: block;}
-ol,ul{list-style:none;margin:0px;padding:0px;}
-blockquote,q{quotes:none;}
-blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
-table{border-collapse:collapse;border-spacing:0;}
-/* start editing from here */
-a{text-decoration:none;}
-.txt-rt{text-align:right;}/* text align right */
-.txt-lt{text-align:left;}/* text align left */
-.txt-center{text-align:center;}/* text align center */
-.float-rt{float:right;}/* float right */
-.float-lt{float:left;}/* float left */
-.clear{clear:both;}/* clear float */
-.pos-relative{position:relative;}/* Position Relative */
-.pos-absolute{position:absolute;}/* Position Absolute */
-.vertical-base{	vertical-align:baseline;}/* vertical align baseline */
-.vertical-top{	vertical-align:top;}/* vertical align top */
-nav.vertical ul li{	display:block;}/* vertical menu */
-nav.horizontal ul li{	display: inline-block;}/* horizontal menu */
-img{max-width:100%;}
-/*end reset*/
-
 body{
+	height: 100%;
 	padding:0;
 	margin:0;
     background:url(../assets/bg.jpg) no-repeat center;
@@ -88,7 +147,7 @@ body{
 
 h1,h2,h3,h4,h5,h6{
 	margin:0;	
-font-family: 'Kotta One', serif;
+	font-family: 'Kotta One', serif;
 }	
 p{
 	margin:0;
@@ -112,7 +171,7 @@ label{
     text-transform: uppercase;
 }
 .main{
-    width: 45%;
+    width: 50%;
     margin: 45px auto;
     background:rgba(255, 255, 255, 0.88);
     padding: 30px 30px;
@@ -139,7 +198,7 @@ p.copy_rights a:hover{
 }
 /*-- movie ticket --*/
 .front{
-    margin: 5px 4px 45px 38px;
+    margin: 5px 30px 20px 30px;
     background-color: #D88A04;
     color: #fff;
     text-align: center;
@@ -148,10 +207,10 @@ p.copy_rights a:hover{
 	}
 .booking-details {
     float: right;
-    width: 38%;
+    width: 28%;
 }
 .booking-details h3 {
-	margin: 5px 5px 0 0;
+	margin: 10px 10px 0 0;
 	font-size: 16px;
 	}
 .booking-details p {
@@ -166,7 +225,7 @@ p.copy_rights a:hover{
 	font-weight:normal;
 }
 div.seatCharts-cell {
-	color: #182C4E;
+	color: rgb(0, 0, 0);
     height: 29px;
     width: 29px;
     line-height: 27px;
@@ -202,7 +261,7 @@ div.seatCharts-seat.unavailable {
 	}
 div.seatCharts-container {
     border-right: 1px solid #adadad;
-    width: 54%;
+    width: 60%;
     padding: 0 20px 0 0;
     float: left;
 }
@@ -277,7 +336,6 @@ ul.book-left {
     width: 35%;
 }
 ul.book-right {
-    float: right;
     width: 63%;
 }
 ul.book-left li {
@@ -292,10 +350,6 @@ ul.book-right li {
     color: #000;
     line-height: 1.9em;
 }
-/*-- agileits --*/
-/*-- //movie ticket --*/
-
-/*-- responsive media queries --*/
 
 @media (max-width: 1440px){
 	.main {
