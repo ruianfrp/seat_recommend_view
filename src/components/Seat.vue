@@ -2,114 +2,18 @@
 <div class="content">
 	<h1>座位详情</h1>
 	<div class="main">
-		<h2>教学楼1-101</h2>
+		<h2>{{classroomInfo.classroomName}}</h2>
 		<div class="demo">
 			<div id="seat-map" class="seatCharts-container" tabindex="0" aria-activedescendant="4_1">
 				<div class="front">讲台</div>					
-			<div class="seatCharts-row">
-				<div class="seatCharts-cell seatCharts-space">1</div>
-				<div id="1_1" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-				<div id="1_2" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable"></div>
-				<div id="1_3" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-				<div id="1_4" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-				<div id="1_5" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-				<div id="1_6" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-				<div id="1_7" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-				<div id="1_8" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-				<div id="1_9" class="seatCharts-seat seatCharts-cell available" aria-checked="false"></div>
-				<div id="1_10" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-			</div>
-			<div class="seatCharts-row">
-				<div class="seatCharts-cell seatCharts-space">2</div>
-				<div id="2_1" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-				<div id="2_2" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-				<div id="2_3" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-				<div id="2_4" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-				<div id="2_5" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-				<div id="2_6" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-				<div id="2_7" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-				<div id="2_8" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-				<div id="2_9" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-				<div id="2_10" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-			</div>
-			<div class="seatCharts-row">
-				<div class="seatCharts-cell seatCharts-space">3</div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-			</div>
-			<div class="seatCharts-row">
-				<div class="seatCharts-cell seatCharts-space">4</div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-			</div>
-			<div class="seatCharts-row">
-				<div class="seatCharts-cell seatCharts-space">5</div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-			</div>
-			<div class="seatCharts-row">
-				<div class="seatCharts-cell seatCharts-space">6</div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-			</div>
-			<div class="seatCharts-row">
-				<div class="seatCharts-cell seatCharts-space">7</div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-			</div>
-			<div class="seatCharts-row">
-				<div class="seatCharts-cell seatCharts-space">8</div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-				<div class="seatCharts-cell seatCharts-space"></div>
-			</div>
+				<div class="seatCharts-row" v-for="(row,i) in seatList" :key="i">
+					<div class="seatCharts-cell seatCharts-space">{{i+1}}</div>
+					<div v-for="(col,j) in row" :key="j">
+						<div v-if="col==0" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
+						<div v-if="col==1" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable"></div>
+						<div v-if="col==2" class="seatCharts-cell seatCharts-space"></div>
+					</div>
+				</div>
 			</div>
 			<div class="booking-details">
 				<ul class="book-left">	
@@ -118,10 +22,10 @@
 					<li>教室介绍</li>	
 				</ul>
 				<ul class="book-right">	
-					<li>42</li>
-					<li>35</li>
+					<li>{{classroomInfo.seatNum}}</li>
+					<li>{{classroomInfo.freeSeatNum}}</li>
 				</ul>
-				<div class="clear">此教室位于南校区南部，地点位置比较优异，且靠窗位置比较多，广受师生好评。</div>	
+				<div class="clear">{{classroomInfo.classroomInfo}}</div>	
 				<div id="legend" class="seatCharts-legend"><ul class="seatCharts-legendList"><li class="seatCharts-legendItem"><div class="seatCharts-seat seatCharts-cell available"></div><span class="seatCharts-legendDescription">无人</span></li><li class="seatCharts-legendItem"><div class="seatCharts-seat seatCharts-cell unavailable"></div><span class="seatCharts-legendDescription">有人</span></li></ul></div>
 			</div>
 			<div style="clear:both"></div>
@@ -131,6 +35,83 @@
 </div>
 </template>
 
+<script>
+import axios from 'axios';
+
+export default {
+	mounted:function(){
+		this.getClassroomInfo();
+		this.getSeatInfo();
+	},
+	data() {
+		return {
+			classroomId:'',
+			seatList:[],
+			classroomInfo:{}
+		};
+  	},
+	methods: {
+		getClassroomInfo(){
+			const _this = this
+			_this.classroomId = window.location.href.split('?')[1].split('=')[1];
+			console.log("这是" + this.classroomId)
+			_this.$axios.post('http://localhost:5000/get_classInfo_by_id', {
+				classroomId: this.classroomId
+				}).then(function(res) {
+					console.log(res.data);
+					if(res.data.code === 200){
+						_this.$message({
+							type: 'success',
+							message: res.data.info
+						})
+						_this.classroomInfo=res.data.data.classroom
+						console.log(_this.classroomInfo)
+					}else{
+						_this.$message({
+							type: 'error',
+							message: res.data.error
+						})
+					}
+				}).catch(function(error) {
+					_this.$message({
+						type: 'error',
+						message: '操作异常!'
+					})
+			});
+
+		},
+		getSeatInfo(){
+			const _this = this
+			_this.classroomId = window.location.href.split('?')[1].split('=')[1];
+			console.log("那是" + _this.classroomId)
+			_this.$axios.post('http://localhost:5000/seat_real', {
+				classroomId: this.classroomId
+				}).then(function(res) {
+					console.log(res.data);
+					if(res.data.code === 200){
+						_this.$message({
+						type: 'success',
+						message: res.data.info
+						})
+						_this.seatList=res.data.data.seats
+						console.log(_this.seatList)
+					}else{
+						_this.$message({
+						type: 'error',
+						message: res.data.error
+						})
+					}
+				}).catch(function(error) {
+					_this.$message({
+						type: 'error',
+						message: '操作异常!'
+					})
+			});
+
+		}
+	},
+}
+</script>
 <style>
 body{
 	height: 100%;
@@ -243,7 +224,7 @@ div.seatCharts-seat {
     border-radius: 3px;
 	}
 div.seatCharts-row {
-	height: 35px;
+	height: 45px;
 	}
 div.seatCharts-seat.available {
 	background-color: #949494;

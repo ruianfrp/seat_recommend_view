@@ -67,21 +67,21 @@
 								<div class="card">
 									<div class="thumb-content">
 										<!-- <div class="price">$200</div> -->
-										<a href="">
+										<a :href="'/seat?classroomId=' + classroom.id">
 											<img class="card-img-top img-fluid" src="../assets/timg.jpg" alt="Card image cap">
 										</a>
 									</div>
 									<div class="card-body">
-										<h4 class="card-title"><a href="">{{classroom.classroomName}}</a></h4>
+										<h4 class="card-title"><a :href="'/seat?classroomId=' + classroom.id">{{classroom.classroomName}}</a></h4>
 										<ul class="list-inline product-meta">
 											<li class="list-inline-item">
-												<a href=""><i class="fa fa-group"></i>总座位：{{classroom.seatNum}}</a>
+												<a :href="'/seat?classroomId=' + classroom.id"><i class="fa fa-group"></i>总座位：{{classroom.seatNum}}</a>
 											</li>
 											<li class="list-inline-item">
-												<a href=""><i class="fa fa-user"></i>剩余总座位：{{classroom.freeSeatNum}}</a>
+												<a :href="'/seat?classroomId=' + classroom.id"><i class="fa fa-user"></i>剩余总座位：{{classroom.freeSeatNum}}</a>
 											</li>
                       <li class="list-inline-item" v-if="classroom.placeFreeSeat!=0">
-												<a href=""><i class="el-icon-message-solid"></i>剩余{{specialPlace}}座位：{{classroom.placeFreeSeat}}</a>
+												<a :href="'/seat?classroomId=' + classroom.id"><i class="el-icon-message-solid"></i>剩余{{specialPlace}}座位：{{classroom.placeFreeSeat}}</a>
 											</li>
 										</ul>
 										<p class="card-text">{{classroom.classroomInfo}}</p>
@@ -385,6 +385,9 @@ export default {
             message: '操作异常!'
           })
         });
+    },
+    toSeat(classId){
+        this.$router.push('/seat')
     },
     exit(){
         this.$confirm('确定退出系统?', '提示', {

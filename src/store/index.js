@@ -9,7 +9,8 @@ const store = new Vuex.Store({
     // 存储token
     Authorization: localStorage.getItem('Authorization') ? localStorage.getItem('Authorization') : '',
     userName: '' || localStorage.getItem('userName'),
-    userRole: '' || localStorage.getItem('userRole')
+    userRole: '' || localStorage.getItem('userRole'),
+    clsId: '' || localStorage.getItem('clsId'),
   },
  
   mutations: {
@@ -25,12 +26,17 @@ const store = new Vuex.Store({
     handleUserRole(state, user){
       state.userRole = user.userRole;
       localStorage.setItem('userRole', user.userRole);
+    },
+    handleClassroomId(state, user){
+      state.clsId = user.clsId;
+      localStorage.setItem('clsId', user.clsId);
     }
   },
 
   getters:{
     userName: (state) => state.userName,
-    userRole: (state) => state.userRole
+    userRole: (state) => state.userRole,
+    clsId: (state) => state.clsId
   }
 });
  
