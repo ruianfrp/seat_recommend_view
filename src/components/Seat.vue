@@ -1,37 +1,57 @@
 <template>
-<div class="content">
-	<h1>座位详情</h1>
-	<div class="main">
-		<h2>{{classroomInfo.classroomName}}</h2>
-		<div class="demo">
-			<div id="seat-map" class="seatCharts-container" tabindex="0" aria-activedescendant="4_1">
-				<div class="front">讲台</div>					
-				<div class="seatCharts-row" v-for="(row,i) in seatList" :key="i">
-					<div class="seatCharts-cell seatCharts-space">{{i+1}}</div>
-					<div v-for="(col,j) in row" :key="j">
-						<div v-if="col==0" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-						<div v-if="col==1" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable"></div>
-						<div v-if="col==2" class="seatCharts-cell seatCharts-space"></div>
+<div class="w3layouts-main">
+	<div class="bg-layer">
+		<div class="content">
+			<h1>座位详情</h1>
+			<div class="main">
+				<h2>{{classroomInfo.classroomName}}</h2>
+				<div class="demo">
+					<div id="seat-map" class="seatCharts-container" tabindex="0" aria-activedescendant="4_1">
+						<div>
+							<div class="front">讲台</div>
+							<div class="left">
+								<span class="left_title">窗户</span>
+							</div>
+							<div class="seatCharts-row" v-for="(row,i) in seatList" :key="i">
+								<div class="seatCharts-cell seatCharts-space">{{i+1}}</div>
+								<div v-for="(col,j) in row" :key="j">
+									<div v-if="col==0" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
+									<div v-if="col==1" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable"></div>
+									<div v-if="col==2" class="seatCharts-cell seatCharts-space"></div>
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
+					<div class="booking-details">
+						<ul class="book-left">	
+							<li>总座位数</li>
+							<li>空座位数</li>
+							<li>教室介绍</li>	
+						</ul>
+						<ul class="book-right">	
+							<li>{{classroomInfo.seatNum}}</li>
+							<li>{{classroomInfo.freeSeatNum}}</li>
+						</ul>
+						<div class="clear">{{classroomInfo.classroomInfo}}</div>
+						<div id="legend" class="seatCharts-legend">
+							<ul class="seatCharts-legendList">
+								<li class="seatCharts-legendItem">
+									<div class="seatCharts-seat seatCharts-cell available"></div>
+									<span class="seatCharts-legendDescription">无人</span>
+								</li>
+								<li class="seatCharts-legendItem">
+									<div class="seatCharts-seat seatCharts-cell unavailable"></div>
+									<span class="seatCharts-legendDescription">有人</span>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div style="clear:both"></div>
+				</div>	
 			</div>
-			<div class="booking-details">
-				<ul class="book-left">	
-					<li>总座位数</li>
-					<li>空座位数</li>
-					<li>教室介绍</li>	
-				</ul>
-				<ul class="book-right">	
-					<li>{{classroomInfo.seatNum}}</li>
-					<li>{{classroomInfo.freeSeatNum}}</li>
-				</ul>
-				<div class="clear">{{classroomInfo.classroomInfo}}</div>	
-				<div id="legend" class="seatCharts-legend"><ul class="seatCharts-legendList"><li class="seatCharts-legendItem"><div class="seatCharts-seat seatCharts-cell available"></div><span class="seatCharts-legendDescription">无人</span></li><li class="seatCharts-legendItem"><div class="seatCharts-seat seatCharts-cell unavailable"></div><span class="seatCharts-legendDescription">有人</span></li></ul></div>
-			</div>
-			<div style="clear:both"></div>
-	    </div>	
+			<p class="copy_rights">© 2020 Self-study seat search and seat recommendation system. </p>
+		</div>
 	</div>
-	<p class="copy_rights">© 2020 Self-study seat search and seat recommendation system. </p>
 </div>
 </template>
 
@@ -113,11 +133,22 @@ export default {
 }
 </script>
 <style>
+.w3layouts-main{
+    background-image: '../assets/bg.jpg';
+    background-repeat: repeat-x;
+    animation: slideleft 20000s infinite linear;
+    -webkit-animation: slideleft 20000s infinite linear;
+    background-size: cover;
+	-webkit-background-size:cover;
+	-moz-background-size:cover; 
+    background-attachment: fixed;
+    position: relative;
+	min-height: 100vh;
+}
 body{
 	height: 100%;
 	padding:0;
 	margin:0;
-    background:url(../assets/bg.jpg) no-repeat center;
     background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
@@ -224,6 +255,8 @@ div.seatCharts-seat {
     border-radius: 3px;
 	}
 div.seatCharts-row {
+	float: center;
+	margin-left: 46px;
 	height: 45px;
 	}
 div.seatCharts-seat.available {
@@ -253,7 +286,9 @@ ul.seatCharts-legendList {
 	padding-left: 0px;
 	}
 .seatCharts-legendItem{
-	margin-top: 10px;
+	float: left;
+	margin-top: 100px;
+	margin-left: 10px;
 	line-height: 2;
 	}
 span.seatCharts-legendDescription {
@@ -555,6 +590,21 @@ ul.book-right li {
 		line-height: 0px;
 		font-size: 13px;
 	}
+}
+.left{
+	float: left;
+	display: flex;
+	align-items:center;
+	height: 310px;
+	padding: 10px;
+    border-radius: 3px;
+	background-color: rgb(119, 188, 201);
+    color: #fff;
+}
+.left_title{
+	display: block;
+	word-wrap: break-word;
+	width: 20px;
 }
 
 </style>
