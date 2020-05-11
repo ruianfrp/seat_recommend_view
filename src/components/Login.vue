@@ -19,7 +19,7 @@
 						<button class="btn" @click="login">登 录</button>
 					</div>
 					<div class="links">
-						<p class="right" @click="toRegistered"><a href="#">新用户? 注册</a></p>
+						<p class="right" @click="toRegistered"><a href="">新用户? 注册</a></p>
 						<div class="clear"></div>
 					</div>
 			</div>

@@ -3,10 +3,14 @@
 	<div class="bg-layer">
 		<div class="content">
 			<h1>座位详情</h1>
-			<div class="main">
-				<h2>{{classroomInfo.classroomName}}</h2>
+			<div class="main" v-if="isRouterAlive">
+				<el-button-group class="seatBtn">
+					<el-button @click="back" type="warning" icon="el-icon-back" size="mini" round>返回</el-button>
+					<el-button @click="refresh" type="primary" size="mini" round>刷新<i class="el-icon-refresh el-icon--right"></i></el-button>
+				</el-button-group>
+				<h2 class="clsName">{{classroomInfo.classroomName}}</h2>
 				<div class="demo">
-					<div id="seat-map" class="seatCharts-container" tabindex="0" aria-activedescendant="4_1">
+					<div id="seat-map" class="seatCharts-container" tabindex="0" aria-activedescendant="4_1" v-loading="loading">
 						<div>
 							<div class="front">讲台</div>
 							<div class="left">
@@ -65,12 +69,20 @@ export default {
 	},
 	data() {
 		return {
+			isRouterAlive:true,
 			classroomId:'',
 			seatList:[],
-			classroomInfo:{}
+			classroomInfo:{},
+			loading: true
 		};
   	},
 	methods: {
+		reload:function(){
+			this.isRouterAlive = false;
+			this.$nextTick(function(){
+				this.isRouterAlive = true;
+			})
+		},
 		getClassroomInfo(){
 			const _this = this
 			_this.classroomId = window.location.href.split('?')[1].split('=')[1];
@@ -115,6 +127,7 @@ export default {
 						})
 						_this.seatList=res.data.data.seats
 						console.log(_this.seatList)
+						_this.loading = false
 					}else{
 						_this.$message({
 						type: 'error',
@@ -128,6 +141,12 @@ export default {
 					})
 			});
 
+		},
+		back(){
+			this.$router.push('/classrooms')
+		},
+		refresh(){
+			this.$router.go(0);
 		}
 	},
 }
@@ -256,7 +275,7 @@ div.seatCharts-seat {
 	}
 div.seatCharts-row {
 	float: center;
-	margin-left: 46px;
+	margin-left: 50px;
 	height: 45px;
 	}
 div.seatCharts-seat.available {
@@ -605,6 +624,9 @@ ul.book-right li {
 	display: block;
 	word-wrap: break-word;
 	width: 20px;
+}
+.seatBtn{
+	float: right;
 }
 
 </style>

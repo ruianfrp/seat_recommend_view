@@ -9,7 +9,7 @@
 			<div class="header-left-bottom">
 					<div class="icon1">
 						<span class="fa fa-user"></span>
-						<input type="text" placeholder="用户名" v-model="loginForm.username" required=""/>
+						<input type="text" placeholder="用户名" v-model="loginForm.username" required="" onkeyup="value=value.replace(/[^\w\.\/]/ig,'')"/>
 					</div>
 					<div class="icon1">
 						<span class="fa fa-lock"></span>
