@@ -9,11 +9,13 @@ import axios from 'axios'
 import '../config/axios'
 import promise from 'es6-promise'
 import store from './store/index'
+import SIdentify from './components/identify.vue'
 import '../css/font-awesome.min.css'
 import '../css/style1.css'
 import '../css/style.css'
 promise.polyfill()
 Vue.use(ElementUI)
+Vue.component("SIdentify",SIdentify)
 Vue.config.productionTip = false
 
 

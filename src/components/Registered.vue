@@ -20,10 +20,10 @@
 						<input type="password" placeholder="确认密码" v-model="loginForm.confirm_password" required=""/>
 					</div>
 					<div class="bottom">
-						<button class="btn" @click="registered">注 册</button>
+						<el-button class="btn" @click="registered">注 册</el-button>
 					</div>
                     <div class="bottom">
-						<button class="btn1" @click="toLogin">取 消</button>
+						<el-button class="btn1" @click="toLogin">取 消</el-button>
 					</div>
 			</div>
 		</div>
@@ -93,6 +93,9 @@ export default {
     },
     toLogin(){
         this.$router.push('/login')
+        setTimeout(() => {
+            location.reload() // 强制刷新
+        })
     }
   }
 };

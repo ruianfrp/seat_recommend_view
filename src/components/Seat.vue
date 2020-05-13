@@ -3,14 +3,34 @@
 	<div class="bg-layer">
 		<div class="content">
 			<h1>座位详情</h1>
+			<div class="headerbar">
+				<ul class="header-ul" style="font-size: 14px;">
+					<li><el-button class="ant-dropdown-trigger" type="text" @click="dialogTableVisible=true,getCurrentlyAppointment($store.getters.userName)">Hi , {{$store.getters.userName}}
+							<i class="el-icon-user" style="margin-left: 2px;"></i>
+						</el-button>
+						<el-dialog title="当前预约" :visible.sync="dialogTableVisible">
+							<el-table :data="gridData">
+								<el-table-column property="startTime" label="日期" width="150"></el-table-column>
+								<el-table-column property="classroomName" label="教室名称" width="200"></el-table-column>
+								<el-table-column property="seat" label="预约座位"></el-table-column>
+							</el-table>
+						</el-dialog>
+						<el-button @click="exit" class="exitBtn" type="danger" icon="el-icon-switch-button" size="mini" circle></el-button>
+					</li>
+				</ul>
+			</div>
 			<div class="main" v-if="isRouterAlive">
-				<el-button-group class="seatBtn">
+				<el-button-group class="seatBtn1">
 					<el-button @click="back" type="warning" icon="el-icon-back" size="mini" round>返回</el-button>
 					<el-button @click="refresh" type="primary" size="mini" round>刷新<i class="el-icon-refresh el-icon--right"></i></el-button>
 				</el-button-group>
+				<el-button-group class="seatBtn2">
+					<el-button @click="savecanvas(classroomInfo.classroomName)" type="success" icon="el-icon-picture-outline" size="mini" round>导出</el-button>
+					<el-button @click="refresh" type="primary" size="mini" round>编辑<i class="el-icon-edit-outline el-icon--right"></i></el-button>
+				</el-button-group>
 				<h2 class="clsName">{{classroomInfo.classroomName}}</h2>
 				<div class="demo">
-					<div id="seat-map" class="seatCharts-container" tabindex="0" aria-activedescendant="4_1" v-loading="loading">
+					<div id="seat-map" class="seatCharts-container" tabindex="0" aria-activedescendant="4_1" v-loading="loading" ref="canvas">
 						<div>
 							<div class="front">讲台</div>
 							<div class="left">
@@ -19,9 +39,43 @@
 							<div class="seatCharts-row" v-for="(row,i) in seatList" :key="i">
 								<div class="seatCharts-cell seatCharts-space">{{i+1}}</div>
 								<div v-for="(col,j) in row" :key="j">
-									<div v-if="col==0" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell available"></div>
-									<div v-if="col==1" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable"></div>
+									<div v-if="col==0" role="checkbox" aria-checked="false" focusable="true" tabindex="-1"
+									class="seatCharts-seat seatCharts-cell available" @click="dialogFormVisible=true,seatX=j+1,seatY=i+1"></div>
+										<el-dialog class="dialogSeat" title="预约座位" :visible.sync="dialogFormVisible">
+											<el-form class="appointmentSeat" :model="ruleForm" ref="ruleForm" label-width="100px">
+												<el-form-item label="预约日期" required>
+													<el-col :span="11">
+														<el-form-item prop="date1" :rules="[
+															{ type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+														]">
+															<el-date-picker
+															v-model="ruleForm.date1"
+															type="date"
+															placeholder="选择日期"
+															format="yyyy-MM-dd"
+															value-format="yyyy-MM-dd"
+															style="width: 100%;"
+															:picker-options="pickerOptions0">
+															</el-date-picker>
+														</el-form-item>
+													</el-col>
+												</el-form-item>
+											</el-form>
+											<div slot="footer" class="dialog-footer">
+												<el-button @click="dialogFormVisible=false">取 消</el-button>
+												<el-button type="primary" @click="appointment(seatX,seatY)">确 定</el-button>
+											</div>
+										</el-dialog>
+									<div v-if="col==1" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable">
+										<i class="el-icon-s-check" style="margin: 4px 2px 2px 2px;font-size: 20px;"></i>
+									</div>
 									<div v-if="col==2" class="seatCharts-cell seatCharts-space"></div>
+									<div v-if="col==3" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell appointment">
+										<i class="el-icon-user-solid" style="margin: 4px 2px 2px 2px;font-size: 20px;"></i>
+									</div>
+									<div v-if="col==4" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell damage">
+										<i class="el-icon-warning" style="margin: 4px 2px 2px 2px;font-size: 20px;"></i>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -44,8 +98,16 @@
 									<span class="seatCharts-legendDescription">无人</span>
 								</li>
 								<li class="seatCharts-legendItem">
-									<div class="seatCharts-seat seatCharts-cell unavailable"></div>
+									<div class="seatCharts-seat seatCharts-cell unavailable"><i class="el-icon-s-check" style="margin: 4px 2px 2px 2px;font-size: 20px;"></i></div>
 									<span class="seatCharts-legendDescription">有人</span>
+								</li>
+								<li class="seatCharts-legendItem">
+									<div class="seatCharts-seat seatCharts-cell appointment"><i class="el-icon-user-solid" style="margin: 4px 2px 2px 2px;font-size: 20px;"></i></div>
+									<span class="seatCharts-legendDescription">已预约</span>
+								</li>
+								<li class="seatCharts-legendItem">
+									<div class="seatCharts-seat seatCharts-cell damage"><i class="el-icon-warning" style="margin: 4px 2px 2px 2px;font-size: 20px;"></i></div>
+									<span class="seatCharts-legendDescription">损坏座位</span>
 								</li>
 							</ul>
 						</div>
@@ -61,6 +123,7 @@
 
 <script>
 import axios from 'axios';
+import html2canvas from "html2canvas"
 
 export default {
 	mounted:function(){
@@ -69,11 +132,24 @@ export default {
 	},
 	data() {
 		return {
+			gridData: [],
+			seatX:'',
+			seatY:'',
+			dialogFormVisible: false,
+			dialogTableVisible: false,
 			isRouterAlive:true,
 			classroomId:'',
 			seatList:[],
 			classroomInfo:{},
-			loading: true
+			loading: true,
+			ruleForm:{
+				date1: ''
+			},
+			pickerOptions0: {
+				disabledDate(time) {
+					return time.getTime() < Date.now() - 8.64e7;
+				}
+     		}
 		};
   	},
 	methods: {
@@ -86,7 +162,6 @@ export default {
 		getClassroomInfo(){
 			const _this = this
 			_this.classroomId = window.location.href.split('?')[1].split('=')[1];
-			console.log("这是" + this.classroomId)
 			_this.$axios.post('http://localhost:5000/get_classInfo_by_id', {
 				classroomId: this.classroomId
 				}).then(function(res) {
@@ -97,7 +172,6 @@ export default {
 							message: res.data.info
 						})
 						_this.classroomInfo=res.data.data.classroom
-						console.log(_this.classroomInfo)
 					}else{
 						_this.$message({
 							type: 'error',
@@ -115,7 +189,6 @@ export default {
 		getSeatInfo(){
 			const _this = this
 			_this.classroomId = window.location.href.split('?')[1].split('=')[1];
-			console.log("那是" + _this.classroomId)
 			_this.$axios.post('http://localhost:5000/seat_real', {
 				classroomId: this.classroomId
 				}).then(function(res) {
@@ -127,7 +200,74 @@ export default {
 						})
 						_this.seatList=res.data.data.seats
 						console.log(_this.seatList)
+					}else{
+						_this.$message({
+						type: 'error',
+						message: res.data.error
+						})
+					}
+					_this.loading = false
+				}).catch(function(error) {
+					_this.$message({
+						type: 'error',
+						message: '操作异常!'
+					})
+			});
+		},
+		getCurrentlyAppointment(userNo){
+			const _this = this
+			console.log(userNo)
+			_this.$axios.post('http://localhost:5000/currently_appointment', {
+				userNo: userNo
+				}).then(function(res) {
+					console.log(res.data);
+					if(res.data.code === 200){
+						_this.$message({
+							type: 'success',
+							message: res.data.info
+						})
+						_this.gridData = res.data.data.appointments
+					}else if(res.data.code === 300){
+						_this.$message({
+							type: 'warning',
+							message: res.data.warn
+							
+						})
+					}
+					else{
+						_this.$message({
+							type: 'error',
+							message: res.data.error
+						})
+					}
+				}).catch(function(error) {
+					_this.$message({
+						type: 'error',
+						message: '操作异常!'
+					})
+			});
+		},
+		appointment(seatX, seatY){
+			const _this = this
+			_this.classroomId = window.location.href.split('?')[1].split('=')[1];
+			_this.$axios.post('http://localhost:5000/seat_appointment', {
+				classroomId: this.classroomId,
+				seatX: seatX,
+				seatY: seatY,
+				startTime: this.ruleForm.date1,
+				userNo: localStorage.getItem('userName')
+				}).then(function(res) {
+					console.log(res.data);
+					if(res.data.code === 200){
+						_this.$message({
+							type: 'success',
+							message: res.data.info
+						})
 						_this.loading = false
+						_this.dialogFormVisible = false
+						_this.getSeatInfo()
+						_this.getClassroomInfo()
+						_this.reload()
 					}else{
 						_this.$message({
 						type: 'error',
@@ -140,13 +280,62 @@ export default {
 						message: '操作异常!'
 					})
 			});
-
+		},
+		savecanvas(classroomName){
+			let canvas = document.querySelector('.seatCharts-container');
+			let that = this;
+			html2canvas(canvas,{scale:2,logging:false,useCORS:true}).then(function(canvas) {
+					let type = 'png';
+					let imgData = canvas.toDataURL(type);
+					// 照片格式处理
+					let _fixType = function(type) {
+						type = type.toLowerCase().replace(/jpg/i, 'jpeg');
+						let r = type.match(/png|jpeg|bmp|gif/)[0];
+						return 'image/' + r;
+					};
+					imgData = imgData.replace(_fixType(type),'image/octet-stream');
+					let filename = classroomName + '.' + type;
+					that.saveFile(imgData,filename);
+			});
+		},
+		saveFile(data, filename){
+			let save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+			save_link.href = data;
+			save_link.download = filename;
+		
+			let event = document.createEvent('MouseEvents');
+			event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+			save_link.dispatchEvent(event);
 		},
 		back(){
 			this.$router.push('/classrooms')
 		},
 		refresh(){
 			this.$router.go(0);
+		},
+		exit(){
+			this.$confirm('确定退出系统?', '提示', {
+				confirmButtonText: '确定',
+				cancelButtonText: '取消',
+				type: 'info'
+			}).then(() => {
+				localStorage.removeItem('Authorization');
+				localStorage.removeItem('userName');
+				localStorage.removeItem('userRole');
+				this.$router.push('/login')
+				this.$message({
+					type: 'success',
+					message: '退出成功!'
+				})
+				setTimeout(() => {
+					location.reload() // 强制刷新
+				}, 1000)
+			}).catch(() => {
+				this.$message({
+					type: 'info',
+					message: '已取消退出'
+				})
+			})
 		}
 	},
 }
@@ -292,27 +481,31 @@ div.seatCharts-seat.unavailable {
 	background-color: #D00000;
 	cursor: not-allowed;
 	}
+div.seatCharts-seat.appointment {
+	background-color: #2b8bb8;
+	cursor: not-allowed;
+	}
+div.seatCharts-seat.damage {
+	background-color: #c08a14;
+	cursor: not-allowed;
+	}
 div.seatCharts-container {
     border-right: 1px solid #adadad;
     width: 60%;
     padding: 0 20px 0 0;
     float: left;
 }
-div.seatCharts-legend {
-	padding-left: 0px;
-	}
 ul.seatCharts-legendList {
-	padding-left: 0px;
+	margin-top: 130px;
 	}
 .seatCharts-legendItem{
 	float: left;
-	margin-top: 100px;
-	margin-left: 10px;
-	line-height: 2;
 	}
 span.seatCharts-legendDescription {
-	margin-left: 5px;
+	float: left;
 	line-height: 30px;
+	margin-left: 10px;
+	margin-right: 10px;
 	}
 .checkout-button {
     display: block;
@@ -625,8 +818,34 @@ ul.book-right li {
 	word-wrap: break-word;
 	width: 20px;
 }
-.seatBtn{
+.seatBtn1{
 	float: right;
+}
+.seatBtn2{
+	float: left;
+}
+.headerbar{
+	float: right;
+	margin-right: 320px;
+}
+.header-ul {
+    display: flex;
+    width: 200px;
+}
+.header-ul li {
+    flex-grow: 1;
+    text-align: center;
+}
+.header-ul>li img {
+    width: 35px;
+    height: 35px;
+    border-radius: 100px;
+}
+.ant-dropdown-trigger{
+    color: rgb(255, 255, 255);
+}
+.exitBtn{
+    margin-left: 5px;
 }
 
 </style>

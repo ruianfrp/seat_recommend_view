@@ -5,9 +5,9 @@
 	<div class="container">
         <div class="headerbar">
             <ul class="header-ul" style="font-size: 14px;">
-                <li><span class="ant-dropdown-trigger">Hi , {{$store.getters.userName}}
-                        <i class="el-icon-user" style="margin-left: 2px;"></i>
-                    </span>
+                <li><el-button class="ant-dropdown-trigger" type="text" @click="dialogTableVisible=true">Hi , {{$store.getters.userName}}
+                      <i class="el-icon-user" style="margin-left: 2px;"></i>
+                    </el-button>
                     <el-button @click="exit" class="exitBtn" type="danger" icon="el-icon-switch-button" size="mini" circle></el-button>
                 </li>
             </ul>
@@ -52,7 +52,7 @@
 					<div class="widget category-list">
 						<h4 class="widget-header">座位推荐</h4>
 							<ul class="category-list">
-                <li @click="getClassroomInfo(1)"><a href="#">全部 <span>{{allSeatNum}}</span></a></li>
+                <li @click="getClassroomInfo(1)"><a href="">全部 <span>{{allSeatNum}}</span></a></li>
                 <li v-for="seatNum in seatNumForm" :key="seatNum.seatPlaceNo" @click="getSpecialClassroomInfo(seatNum.seatPlaceNo)"><a href="#">{{seatNum.seatPlace}} <span>{{seatNum.counts}}</span></a></li>
 							</ul>
 					</div>
@@ -62,11 +62,9 @@
 				<div class="product-grid-list">
 					<div class="row mt-30" v-if="isRouterAlive">
 						<div v-for="classroom in classroomForm" :key="classroom.id" class="col-sm-12 col-lg-4 col-md-6">
-							<!-- product card -->
 							<div class="product-item bg-light">
 								<div class="card">
 									<div class="thumb-content">
-										<!-- <div class="price">$200</div> -->
 										<a :href="'/seat?classroomId=' + classroom.id">
 											<img class="card-img-top img-fluid" src="../assets/timg.jpg" alt="Card image cap">
 										</a>

@@ -9,12 +9,21 @@
 			<div class="header-left-bottom">
 					<div class="icon1">
 						<span class="fa fa-user"></span>
-						<input type="text" placeholder="用户名" v-model="loginForm.username" required=""/>
+						<input class="userNameText" type="text" placeholder="用户名" v-model="loginForm.username" required=""/>
 					</div>
 					<div class="icon1">
 						<span class="fa fa-lock"></span>
 						<input type="password" placeholder="密码" v-model="loginForm.password" required=""/>
 					</div>
+          <div class="icon2">
+						<span class="fa fa-lock"></span>
+						<input class="codeText" type="text" placeholder="验证码" v-model="loginForm.verifycode" required=""/>
+					</div>
+            <div class="identifybox">
+              <div class="code" @click="refreshCode">
+                  <s-identify :identifyCode="identifyCode"></s-identify>
+              </div>
+          </div>
 					<div class="bottom">
 						<button class="btn" @click="login">登 录</button>
 					</div>
@@ -24,7 +33,6 @@
 					</div>
 			</div>
 		</div>
-		
 		<div class="copyright">
 			<p>© 2020 Self-study seat search and seat recommendation system. </p>
 		</div>
@@ -36,16 +44,23 @@
 import axios from 'axios';
 import { mapMutations } from 'vuex';
 export default {
+  name: "codetest",
   data () {
     return {
+      identifyCodes: "1234567890",
+      identifyCode: "",
       loginForm: {
         username: '',
-        password: ''
+        password: '',
+        verifycode: ''
       },
       user: {}
     };
   },
- 
+  mounted() {
+    this.identifyCode = "";
+    this.makeCode(this.identifyCodes, 4);
+  },
   methods: {
     ...mapMutations(['changeLogin']),
     ...mapMutations(['handleUserName']),
@@ -57,7 +72,12 @@ export default {
           type: 'error',
           message: '账号密码不能为空!'
         })
-      } else {
+      } else if(_this.loginForm.verifycode === ''){
+        _this.$message({
+          type: 'error',
+          message: '请输入验证码!'
+        })
+      }else if(_this.loginForm.verifycode === _this.identifyCode){
         _this.$axios.post('/login', {
             username: this.loginForm.username,
             password: this.loginForm.password,
@@ -87,10 +107,36 @@ export default {
           })
           console.log(error);
         });
+      }else{
+        _this.$message({
+          type: 'error',
+          message: '验证码错误!'
+        })
       }
+    },
+    // 生成随机数
+    randomNum(min, max) {
+      return Math.floor(Math.random() * (max - min) + min)
+    },
+    // 切换验证码
+    refreshCode() {
+      this.identifyCode = ''
+      this.makeCode(this.identifyCodes, 4)
+    },
+    // 生成四位随机验证码
+    makeCode(o, l) {
+      for (let i = 0; i < l; i++) {
+        this.identifyCode += this.identifyCodes[
+          this.randomNum(0, this.identifyCodes.length)
+        ]
+      }
+      console.log(this.identifyCode)
     },
     toRegistered(){
         this.$router.push('/registered')
+        setTimeout(() => {
+            location.reload() // 强制刷新
+        })
     }
   }
 };
@@ -209,11 +255,11 @@ a {
 ::-webkit-input-placeholder{
     color: #333!important;
 }
-.header-left-bottom input[type="text"] {
+.userNameText {
     outline: none;
     font-size: 15px;
     color: #222;
-	border:none;
+	  border:none;
     width: 90%;
     display: inline-block;
     background: transparent;
@@ -447,5 +493,31 @@ h3 a {
 	h1 {
 		font-size: 30px;
 	}
+}
+.code {
+  float: right;
+  margin: 4px 4px 0 0;
+}
+.icon2 {
+  float: left;
+  width: 150px;
+	margin: 0 0 1em;
+	padding: .8em 1em;
+	background: rgba(255, 255, 255, 0.94);
+}
+.icon2 span.fa {
+    float: left;
+    color: #222;
+    margin: 4px 4px 0 6px;
+}
+.codeText{
+    outline: none;
+    font-size: 15px;
+    color: #222;
+	  border:none;
+    width: 120px;
+    display: inline-block;
+    background: transparent;
+    letter-spacing: 1px;
 }
 </style>
