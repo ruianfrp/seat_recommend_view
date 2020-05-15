@@ -25,58 +25,145 @@
 					<el-button @click="refresh" type="primary" size="mini" round>刷新<i class="el-icon-refresh el-icon--right"></i></el-button>
 				</el-button-group>
 				<el-button-group class="seatBtn2">
-					<el-button @click="savecanvas(classroomInfo.classroomName)" type="success" icon="el-icon-picture-outline" size="mini" round>导出</el-button>
-					<el-button @click="refresh" type="primary" size="mini" round>编辑<i class="el-icon-edit-outline el-icon--right"></i></el-button>
+					<el-button @click="dialogPicVisible=true" type="success" icon="el-icon-picture-outline" size="mini" round>导出</el-button>
+					<el-button @click="dialogSeatVisible=true" type="primary" size="mini" round>编辑<i class="el-icon-edit-outline el-icon--right"></i></el-button>
 				</el-button-group>
+				<el-dialog title="座位编辑" :visible.sync="dialogSeatVisible" width="70%" @close="refresh">
+					<el-row :gutter="20">
+						<el-col :offset="1" :span="5">
+							<el-form class="demo-form-inline" size="mini">
+								<el-divider content-position="left">Step1 <i class="el-icon-circle-plus-outline"></i></el-divider>
+								<el-form-item v-if="seatInsertList == null && if_done == false" class="seatFormItem" label="总座位:">
+									<el-input v-model="seatForm.initialization" placeholder="行数，列数"></el-input>
+								</el-form-item>
+								<el-form-item v-if="seatInsertList == null && if_done == false" class="seatFormItem">
+									<el-button type="primary" @click="initialization">确定</el-button>
+								</el-form-item>
+								<el-form-item class="seatFormItem" label="要添加的座位:">
+									<el-input v-model="seatForm.insertSeat" placeholder="行，列"></el-input>
+								</el-form-item>
+								<el-form-item class="seatFormItem">
+									<el-button type="primary" @click="insertSeat">确定</el-button>
+								</el-form-item>
+								<el-divider content-position="left">Step2 <i class="el-icon-delete"></i></el-divider>
+								<el-form-item class="seatFormItem" label="要删除的行:">
+									<el-input v-model="seatForm.deleteRow" placeholder="行数"></el-input>
+								</el-form-item>
+								<el-form-item class="seatFormItem" label="要删除的列:">
+									<el-input v-model="seatForm.deleteCol" placeholder="列数"></el-input>
+								</el-form-item>
+								<el-form-item class="seatFormItem" label="要删除的座位:">
+									<el-input v-model="seatForm.deleteSeat" placeholder="行，列"></el-input>
+								</el-form-item>
+								<el-form-item class="seatFormItem">
+									<el-button type="primary" @click="deleteSeat">确定</el-button>
+								</el-form-item>
+								<el-divider content-position="left">Step3 <i class="el-icon-edit-outline"></i></el-divider>
+								<el-form-item class="seatFormItem" label="修改座位:">
+									<label v-if="seatY == '' || seatX == ''">选择右侧座位</label>
+									<label v-else>{{seatY}} 排 {{seatX}} 座</label>
+								</el-form-item>
+								<el-form-item class="seatFormItem" label="类型:">
+									<el-select v-model="seatForm.updateSeatState" clearable placeholder="请选择">
+										<el-option
+										v-for="item in options"
+										:key="item.value"
+										:label="item.label"
+										:value="item.value">
+										</el-option>
+									</el-select>
+								</el-form-item>
+								<el-form-item class="seatFormItem">
+									<el-button type="primary" @click="updateSeat">确定</el-button>
+								</el-form-item>
+							</el-form>
+						</el-col>
+						<el-col :span="1">
+							<el-divider class="seatDivider" direction="vertical"></el-divider>
+						</el-col>
+						<el-col :span="16">
+								<div>
+									<div class="front">讲台</div>
+									<div class="seatUpdateWindow">
+										<span class="left_title">窗户</span>
+									</div>
+									<div style="height:560px;">
+										<el-scrollbar style="height:100%;">
+											<div class="seatCharts-row" v-for="(row,i) in seatInsertList" :key="i">
+												<div class="seatCharts-cell seatCharts-space">{{i+1}}</div>
+												<div v-for="(col,j) in row" :key="j" style="display:inline-block;">
+													<div v-if="col==0 || col==1 || col==3" role="checkbox" aria-checked="false" focusable="true" tabindex="-1"
+													class="seatCharts-seat seatCharts-cell available" @click="seatX=j+1,seatY=i+1"></div>
+													<div v-if="col==2" class="seatCharts-cell seatCharts-space"></div>
+													<div v-if="col==4" class="seatCharts-seat seatCharts-cell damage1" role="checkbox" aria-checked="false"
+													focusable="true" tabindex="-1" @click="seatX=j+1,seatY=i+1">
+														<i class="el-icon-warning" style="margin: 4px 2px 2px 2px;font-size: 20px;"></i>
+													</div>
+												</div>
+											</div>
+										</el-scrollbar>
+									</div>
+								</div>
+						</el-col>
+					</el-row>
+					<div slot="footer" class="dialog-footer">
+                        <el-button @click="dialogSeatVisible=false">取 消</el-button>
+                        <el-button type="primary" @click="editSeats">确 定</el-button>
+                    </div>
+				</el-dialog>
 				<h2 class="clsName">{{classroomInfo.classroomName}}</h2>
 				<div class="demo">
-					<div id="seat-map" class="seatCharts-container" tabindex="0" aria-activedescendant="4_1" v-loading="loading" ref="canvas">
+					<div id="seat-map" class="seatCharts-container" tabindex="0" aria-activedescendant="4_1" v-loading="loading">
 						<div>
 							<div class="front">讲台</div>
 							<div class="left">
 								<span class="left_title">窗户</span>
 							</div>
-							<div class="seatCharts-row" v-for="(row,i) in seatList" :key="i">
-								<div class="seatCharts-cell seatCharts-space">{{i+1}}</div>
-								<div v-for="(col,j) in row" :key="j">
-									<div v-if="col==0" role="checkbox" aria-checked="false" focusable="true" tabindex="-1"
-									class="seatCharts-seat seatCharts-cell available" @click="dialogFormVisible=true,seatX=j+1,seatY=i+1"></div>
-										<el-dialog class="dialogSeat" title="预约座位" :visible.sync="dialogFormVisible">
-											<el-form class="appointmentSeat" :model="ruleForm" ref="ruleForm" label-width="100px">
-												<el-form-item label="预约日期" required>
-													<el-col :span="11">
-														<el-form-item prop="date1" :rules="[
-															{ type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-														]">
-															<el-date-picker
-															v-model="ruleForm.date1"
-															type="date"
-															placeholder="选择日期"
-															format="yyyy-MM-dd"
-															value-format="yyyy-MM-dd"
-															style="width: 100%;"
-															:picker-options="pickerOptions0">
-															</el-date-picker>
+							<div style="height:350px;">
+								<el-scrollbar style="height:100%;">
+									<div class="seatCharts-row" v-for="(row,i) in seatList" :key="i">
+										<div class="seatCharts-cell seatCharts-space">{{i+1}}</div>
+										<div v-for="(col,j) in row" :key="j" style="display:inline-block;">
+											<div v-if="col==0" role="checkbox" aria-checked="false" focusable="true" tabindex="-1"
+											class="seatCharts-seat seatCharts-cell available" @click="dialogFormVisible=true,seatX=j+1,seatY=i+1"></div>
+												<el-dialog class="dialogSeat" title="预约座位" :visible.sync="dialogFormVisible">
+													<el-form class="appointmentSeat" :model="ruleForm" ref="ruleForm" label-width="100px">
+														<el-form-item label="预约日期" required>
+															<el-col :span="11">
+																<el-form-item prop="date1" :rules="[
+																	{ type: 'date', required: true, message: '请选择日期', trigger: 'change' }
+																]">
+																	<el-date-picker
+																	v-model="ruleForm.date1"
+																	type="date"
+																	placeholder="选择日期"
+																	format="yyyy-MM-dd"
+																	value-format="yyyy-MM-dd"
+																	style="width: 100%;"
+																	:picker-options="pickerOptions0">
+																	</el-date-picker>
+																</el-form-item>
+															</el-col>
 														</el-form-item>
-													</el-col>
-												</el-form-item>
-											</el-form>
-											<div slot="footer" class="dialog-footer">
-												<el-button @click="dialogFormVisible=false">取 消</el-button>
-												<el-button type="primary" @click="appointment(seatX,seatY)">确 定</el-button>
+													</el-form>
+													<div slot="footer" class="dialog-footer">
+														<el-button @click="dialogFormVisible=false">取 消</el-button>
+														<el-button type="primary" @click="appointment(seatX,seatY)">确 定</el-button>
+													</div>
+												</el-dialog>
+											<div v-if="col==1" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable">
+												<i class="el-icon-s-check" style="margin: 4px 2px 2px 2px;font-size: 20px;"></i>
 											</div>
-										</el-dialog>
-									<div v-if="col==1" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell unavailable">
-										<i class="el-icon-s-check" style="margin: 4px 2px 2px 2px;font-size: 20px;"></i>
+											<div v-if="col==2" class="seatCharts-cell seatCharts-space"></div>
+											<div v-if="col==3" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell appointment">
+												<i class="el-icon-user-solid" style="margin: 4px 2px 2px 2px;font-size: 20px;"></i>
+											</div>
+											<div v-if="col==4" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell damage">
+												<i class="el-icon-warning" style="margin: 4px 2px 2px 2px;font-size: 20px;"></i>
+											</div>
+										</div>
 									</div>
-									<div v-if="col==2" class="seatCharts-cell seatCharts-space"></div>
-									<div v-if="col==3" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell appointment">
-										<i class="el-icon-user-solid" style="margin: 4px 2px 2px 2px;font-size: 20px;"></i>
-									</div>
-									<div v-if="col==4" role="checkbox" aria-checked="false" focusable="true" tabindex="-1" class="seatCharts-seat seatCharts-cell damage">
-										<i class="el-icon-warning" style="margin: 4px 2px 2px 2px;font-size: 20px;"></i>
-									</div>
-								</div>
+								</el-scrollbar>
 							</div>
 						</div>
 					</div>
@@ -117,6 +204,32 @@
 			</div>
 			<p class="copy_rights">© 2020 Self-study seat search and seat recommendation system. </p>
 		</div>
+		<el-dialog title="座位导出" :visible.sync="dialogPicVisible" fullscreen>
+			<div ref="imageDom">
+				<div class="front">讲台</div>
+				<div class="seatUpdateWindow">
+					<span class="left_title">窗户</span>
+				</div>
+				<div>
+					<div class="seatCharts-row" v-for="(row,i) in seatList" :key="i">
+						<div class="seatCharts-cell seatCharts-space">{{i+1}}</div>
+						<div v-for="(col,j) in row" :key="j" style="display:inline-block;">
+							<div v-if="col==0 || col==1 || col==3" role="checkbox" aria-checked="false" focusable="true" tabindex="-1"
+							class="seatCharts-seat seatCharts-cell available" @click="seatX=j+1,seatY=i+1"></div>
+							<div v-if="col==2" class="seatCharts-cell seatCharts-space"></div>
+							<div v-if="col==4" class="seatCharts-seat seatCharts-cell damage1" role="checkbox" aria-checked="false"
+							focusable="true" tabindex="-1" @click="seatX=j+1,seatY=i+1">
+								<i class="el-icon-warning" style="margin: 4px 2px 2px 2px;font-size: 20px;"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div slot="footer" class="dialog-footer">
+                    <el-button @click="dialogPicVisible=false">取 消</el-button>
+                    <el-button type="primary" @click="clickGeneratePicture(classroomInfo.classroomName),dialogPicVisible=false">确 定</el-button>
+                </div>
+		</el-dialog>
 	</div>
 </div>
 </template>
@@ -132,14 +245,18 @@ export default {
 	},
 	data() {
 		return {
+			if_done: false,
 			gridData: [],
 			seatX:'',
 			seatY:'',
 			dialogFormVisible: false,
 			dialogTableVisible: false,
-			isRouterAlive:true,
-			classroomId:'',
-			seatList:[],
+			dialogSeatVisible: false,
+			dialogPicVisible: false,
+			isRouterAlive: true,
+			classroomId: '',
+			seatList: null,
+			seatInsertList: null,
 			classroomInfo:{},
 			loading: true,
 			ruleForm:{
@@ -149,7 +266,27 @@ export default {
 				disabledDate(time) {
 					return time.getTime() < Date.now() - 8.64e7;
 				}
-     		}
+			},
+			seatData: [],
+			seatActive: 1,
+			seatForm: {
+				initialization: '',
+				insertSeat: '',
+				deleteRow: null,
+				deleteCol: null,
+				deleteSeat: null,
+				updateSeatState: '',
+				seatMaxX: '',
+				seatMaxY: ''
+			},
+			options: [{
+					value: '选项1',
+					label: '正常座位'
+				},{
+					value: '选项2',
+					label: '损坏座位'
+				}],
+			value: ''
 		};
   	},
 	methods: {
@@ -195,15 +332,17 @@ export default {
 					console.log(res.data);
 					if(res.data.code === 200){
 						_this.$message({
-						type: 'success',
-						message: res.data.info
+							type: 'success',
+							message: res.data.info
 						})
 						_this.seatList=res.data.data.seats
-						console.log(_this.seatList)
+						_this.seatInsertList=res.data.data.seats
+						_this.seatForm.seatMaxX=res.data.data.col,
+						_this.seatForm.seatMaxY=res.data.data.row
 					}else{
 						_this.$message({
-						type: 'error',
-						message: res.data.error
+							type: 'error',
+							message: res.data.error
 						})
 					}
 					_this.loading = false
@@ -251,11 +390,11 @@ export default {
 			const _this = this
 			_this.classroomId = window.location.href.split('?')[1].split('=')[1];
 			_this.$axios.post('http://localhost:5000/seat_appointment', {
-				classroomId: this.classroomId,
-				seatX: seatX,
-				seatY: seatY,
-				startTime: this.ruleForm.date1,
-				userNo: localStorage.getItem('userName')
+					classroomId: this.classroomId,
+					seatX: seatX,
+					seatY: seatY,
+					startTime: this.ruleForm.date1,
+					userNo: localStorage.getItem('userName')
 				}).then(function(res) {
 					console.log(res.data);
 					if(res.data.code === 200){
@@ -306,6 +445,202 @@ export default {
 			let event = document.createEvent('MouseEvents');
 			event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
 			save_link.dispatchEvent(event);
+		},
+		initialization(){
+			const _this = this
+			if(_this.seatForm.initialization.indexOf("，") === -1){
+				_this.$message({
+					type: 'error',
+					message: "请输入座位表的行数和列数，中文逗号隔开！"
+				})
+			}else{
+				_this.seatForm.seatMaxY = _this.seatForm.initialization.split('，')[0];
+				_this.seatForm.seatMaxX = _this.seatForm.initialization.split('，')[1];
+				var myarr = new Array();
+				for(var i = 0; i < _this.seatForm.seatMaxY; i++){
+					myarr[i] = new Array();
+					for ( var j = 0; j < _this.seatForm.seatMaxX; j++) {	
+						myarr[i][j] = 0;
+					}
+				}
+				_this.seatInsertList = myarr
+			}
+		},
+		insertSeat(){
+			const _this = this
+			if(_this.seatForm.insertSeat == ''){
+				_this.$message({
+					type: 'error',
+					message: "请输入添加的座位信息！"
+				})
+			}else{
+				if(_this.seatForm.insertSeat.indexOf("，") === -1){
+					_this.$message({
+						type: 'error',
+						message: "请输入座位表的行数和列数，中文逗号隔开！"
+					})
+				}else{
+					if(_this.seatForm.insertSeat.split('，')[0]-1 >= _this.seatForm.seatMaxY || _this.seatForm.insertSeat.split('，')[1]-1 >= _this.seatForm.seatMaxX){
+						_this.$message({
+							type: 'error',
+							message: "行、列值需小于最大行、列数！"
+						})
+					}else{
+						_this.seatInsertList[_this.seatForm.insertSeat.split('，')[0]-1][_this.seatForm.insertSeat.split('，')[1]-1] = 0
+					}
+				}
+			}
+			_this.seatForm.insertSeat = ''
+		},
+		deleteSeat(){
+			const _this = this
+			if(_this.seatForm.deleteRow == null && _this.seatForm.deleteCol == null && _this.seatForm.deleteSeat == null){
+				_this.$message({
+					type: 'error',
+					message: "请输入要删除的信息！"
+				})
+			}
+			if(_this.seatForm.deleteRow != null){
+				if(_this.seatForm.deleteRow-1 > _this.seatForm.seatMaxY){
+					_this.$message({
+						type: 'error',
+						message: "输入行要小于总行数！"
+					})
+				}else{
+					for(var i = 0; i < _this.seatForm.seatMaxX; i++){
+						_this.seatInsertList[_this.seatForm.deleteRow-1][i] = 2
+					}
+				}
+			}
+			if(_this.seatForm.deleteCol != null){
+				if(_this.seatForm.deleteCol-1 > _this.seatForm.seatMaxX){
+					_this.$message({
+						type: 'error',
+						message: "输入列要小于总列数！"
+					})
+				}else{
+					for(var i = 0; i < _this.seatForm.seatMaxY; i++){
+						_this.seatInsertList[i][_this.seatForm.deleteCol-1] = 2
+					}
+				}
+			}
+			if(_this.seatForm.deleteSeat != null){
+				if(_this.seatForm.deleteSeat.indexOf("，") === -1){
+					_this.$message({
+						type: 'error',
+						message: "请输入座位的行和列，中文逗号隔开！"
+					})
+				}if(_this.seatForm.deleteSeat.split('，')[0]-1 >= _this.seatForm.seatMaxY || _this.seatForm.deleteSeat.split('，')[1]-1 >= _this.seatForm.seatMaxX){
+					_this.$message({
+						type: 'error',
+						message: "行、列值需小于最大行、列数！"
+					})
+				}else{
+					_this.seatInsertList[_this.seatForm.deleteSeat.split('，')[0]-1][_this.seatForm.deleteSeat.split('，')[1]-1] = 2
+				}
+			}
+			_this.seatForm.deleteRow = null
+			_this.seatForm.deleteCol = null
+			_this.seatForm.deleteSeat = null
+		},
+		updateSeat(){
+			const _this = this
+			if(_this.seatX == '' || _this.seatY == ''){
+				_this.$message({
+					type: 'error',
+					message: "请在座位表中选择座位！"
+				})
+			}else if(_this.seatForm.updateSeatState == ''){
+				_this.$message({
+					type: 'error',
+					message: "请选择座位类型！"
+				})
+			}else{
+				if(_this.seatForm.updateSeatState == '选项1'){
+					_this.seatInsertList[_this.seatY-1][_this.seatX-1] = 0
+				}
+				if(_this.seatForm.updateSeatState == '选项2'){
+					_this.seatInsertList[_this.seatY-1][_this.seatX-1] = 4
+				}
+			}
+			_this.seatForm.updateSeatState = ''
+			_this.seatX = ''
+			_this.seatY = ''
+		},
+		clickGeneratePicture(classroomName) {
+			const _this = this
+			html2canvas(_this.$refs.imageDom).then(canvas => {
+				// 转成图片，生成图片地址
+				_this.imgUrl = canvas.toDataURL("image/png");
+				var eleLink = document.createElement("a");
+				eleLink.href = _this.imgUrl; // 转换后的图片地址
+				eleLink.download = classroomName + ".png";
+				// 触发点击
+				document.body.appendChild(eleLink);
+				eleLink.click();
+				// 然后移除
+				document.body.removeChild(eleLink);
+				// _this.dialogPicVisible=false
+			});
+		},
+		editSeats(){
+			const _this = this
+			if(_this.seatInsertList == null){
+				_this.$message({
+					type: 'error',
+					message: "无编辑的座位信息！"
+				})
+			}else{
+				_this.classroomId = window.location.href.split('?')[1].split('=')[1];
+				var place,a = 0;
+				for(var i = 0;i < _this.seatInsertList.length;i++){
+					for(var j = 0;j < _this.seatInsertList[0].length;j++){
+						if(j == 0){
+							place = 1
+						}else if(j == _this.seatInsertList[0].length-1){
+							place = 2
+						}else{
+							place = 0
+						}
+						if(_this.seatInsertList[i][j] != 2){
+							_this.seatData[a] = {
+								"classroomId": _this.classroomId,
+								"seatX": j + 1,
+								"seatY": i + 1,
+								"seatState": _this.seatInsertList[i][j],
+								"seatPlace": place
+							}
+							a++;
+						}
+					}
+				}
+				console.log(_this.seatData)
+				_this.$axios.post('http://localhost:5000/seat_insert', {
+					seatData: _this.seatData
+				}).then(function(res) {
+					console.log(res.data);
+					if(res.data.code === 200){
+						_this.$message({
+							type: 'success',
+							message: res.data.info
+						})
+						_this.dialogSeatVisible = false
+						_this.getSeatInfo()
+						_this.getClassroomInfo()
+						_this.reload()
+					}else{
+						_this.$message({
+							type: 'error',
+							message: res.data.error
+						})
+					}
+				}).catch(function(error) {
+					_this.$message({
+						type: 'error',
+						message: '操作异常!'
+					})
+				});
+			}
 		},
 		back(){
 			this.$router.push('/classrooms')
@@ -463,8 +798,6 @@ div.seatCharts-seat {
     border-radius: 3px;
 	}
 div.seatCharts-row {
-	float: center;
-	margin-left: 50px;
 	height: 45px;
 	}
 div.seatCharts-seat.available {
@@ -488,6 +821,9 @@ div.seatCharts-seat.appointment {
 div.seatCharts-seat.damage {
 	background-color: #c08a14;
 	cursor: not-allowed;
+	}
+div.seatCharts-seat.damage1 {
+	background-color: #c08a14;
 	}
 div.seatCharts-container {
     border-right: 1px solid #adadad;
@@ -847,5 +1183,27 @@ ul.book-right li {
 .exitBtn{
     margin-left: 5px;
 }
-
+.seatFormItem{
+	margin-top: -10px;
+}
+.seatDivider{
+	margin-top: 60px;
+	height: 520px;
+}
+.seatUpdateWindow{
+	float: left;
+	display: flex;
+	align-items:center;
+	height: 500px;
+	padding: 10px;
+    border-radius: 3px;
+	background-color: rgb(119, 188, 201);
+    color: #fff;
+}
+.el-scrollbar .el-scrollbar__wrap .el-scrollbar__view{
+   white-space: nowrap;
+}
+.el-scrollbar__wrap {
+   overflow-x: hidden;
+ }
 </style>
