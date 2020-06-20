@@ -119,7 +119,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="pagination justify-content-center">
+				<!-- <div class="pagination justify-content-center">
 					<nav aria-label="Page navigation example">
 						<ul class="pagination">
 							<li class="page-item">
@@ -139,7 +139,7 @@
 							</li>
 						</ul>
 					</nav>
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>

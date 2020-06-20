@@ -573,14 +573,14 @@ export default {
 				// 转成图片，生成图片地址
 				_this.imgUrl = canvas.toDataURL("image/png");
 				var eleLink = document.createElement("a");
-				eleLink.href = _this.imgUrl; // 转换后的图片地址
+				// 转换后的图片地址
+				eleLink.href = _this.imgUrl;
 				eleLink.download = classroomName + ".png";
 				// 触发点击
 				document.body.appendChild(eleLink);
 				eleLink.click();
 				// 然后移除
 				document.body.removeChild(eleLink);
-				// _this.dialogPicVisible=false
 			});
 		},
 		editSeats(){
